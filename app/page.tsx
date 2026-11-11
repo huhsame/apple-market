@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { AppleMark } from "@/components/Logo";
+import ProductCard, { ProductCardSkeleton } from "@/components/ProductCard";
 import { getCurrentUser } from "@/lib/auth";
+import { getProducts } from "@/lib/products";
 
 export default function Home() {
   return (
@@ -30,25 +31,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 다음 단계에서 상품 목록이 들어갈 자리 */}
+      {/* 판매글 목록 (Read) */}
       <section className="mx-auto w-full max-w-5xl px-5 py-16">
         <div className="mb-8 flex items-end justify-between">
           <h2 className="text-2xl font-bold tracking-tight">최근 올라온 물건</h2>
-          <span className="text-sm text-muted">준비 중</span>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i}>
-              <div className="flex aspect-square items-center justify-center rounded-2xl bg-soft text-neutral-300">
-                <AppleMark className="h-10 w-10" />
-              </div>
-              <div className="mt-3 h-4 w-3/4 rounded bg-soft" />
-              <div className="mt-2 h-4 w-1/3 rounded bg-soft" />
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <ProductCardSkeleton key={i} />
+              ))}
             </div>
-          ))}
-        </div>
+          }
+        >
+          <ProductList />
+        </Suspense>
       </section>
     </>
+  );
+}
+
+// DB에서 판매글을 가져와 카드로 보여주는 부분
+async function ProductList() {
+  const products = await getProducts();
+
+  if (products.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-line py-16 text-center text-sm text-muted">
+        아직 올라온 물건이 없어요. 첫 판매글을 써 보세요!
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
   );
 }
 
@@ -58,9 +79,12 @@ async function HeroActions() {
 
   if (me) {
     return (
-      <span className="inline-flex h-12 items-center rounded-full bg-foreground px-6 text-[15px] font-semibold text-white">
-        {me.nickname} 님, 환영해요! 상품 기능은 곧 열려요
-      </span>
+      <Link
+        href="/products/new"
+        className="inline-flex h-12 items-center rounded-full bg-foreground px-6 text-[15px] font-semibold text-white transition hover:bg-neutral-700"
+      >
+        {me.nickname} 님, 판매글 쓰러 가기
+      </Link>
     );
   }
 

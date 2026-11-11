@@ -30,6 +30,12 @@ export default async function UserMenu() {
       <span className="hidden text-muted sm:inline">
         <b className="font-semibold text-foreground">{me.nickname}</b> 님
       </span>
+      <Link
+        href="/products/new"
+        className="rounded-full bg-foreground px-4 py-2 font-medium text-white transition hover:bg-neutral-700"
+      >
+        판매하기
+      </Link>
       <form action={logout}>
         <button
           type="submit"
