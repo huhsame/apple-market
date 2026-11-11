@@ -72,7 +72,9 @@ supabase/migrations/     DB 변경 기록 (SQL)
 
 > ⚠️ 로그인 계정(`auth.users`)은 같은 Supabase 프로젝트를 쓰는 모든 앱이 공유합니다.
 
-샘플 판매글 10개: `supabase/seed/sample_products.sql` (Supabase SQL Editor에서 실행. 닉네임 `허세임` 계정이 글쓴이)
+샘플 판매글 10개 (사진 포함): `supabase/seed/sample_products.sql`
+- 글쓴이는 샘플 판매자 **`사과농부`** 계정 (로그인 정보는 로컬 `.claude/sample-seller.txt`, git에 안 올라감)
+- 사진은 Unsplash 무료 사진을 사과농부 폴더에 올려 두었고, SQL은 DB에 경로만 넣습니다. (출처는 SQL 주석에)
 
 ## 동작 흐름
 
