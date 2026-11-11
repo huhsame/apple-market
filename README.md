@@ -65,6 +65,8 @@ supabase/migrations/     DB 변경 기록 (SQL)
 
 > ⚠️ 로그인 계정(`auth.users`)은 같은 Supabase 프로젝트를 쓰는 모든 앱이 공유합니다.
 
+샘플 판매글 10개: `supabase/seed/sample_products.sql` (Supabase SQL Editor에서 실행. 닉네임 `허세임` 계정이 글쓴이)
+
 ## 동작 흐름
 
 1. **회원가입**: 폼 → `signup` 서버 액션 → 입력 검사 & 닉네임 중복 확인 → `supabase.auth.signUp()` → 트리거가 `market_profiles`에 닉네임 저장
