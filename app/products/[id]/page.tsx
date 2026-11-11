@@ -2,10 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import DeleteButton from "@/app/products/DeleteButton";
-import { AppleMark } from "@/components/Logo";
 import { getCurrentUser } from "@/lib/auth";
 import { formatPrice, timeAgo } from "@/lib/format";
+import { imageUrl } from "@/lib/images";
 import { getProduct } from "@/lib/products";
+import ImageGallery from "./ImageGallery";
 
 export const metadata = { title: "판매글 · 사과마켓" };
 
@@ -28,10 +29,8 @@ async function ProductDetail({ params }: { params: PageProps<"/products/[id]">["
 
   return (
     <article className="mx-auto w-full max-w-2xl px-5 py-10">
-      {/* 사진 자리 (다음 단계에서 이미지 업로드) */}
-      <div className="flex aspect-[4/3] items-center justify-center rounded-3xl bg-soft text-neutral-300">
-        <AppleMark className="h-16 w-16" />
-      </div>
+      {/* 사진 (경로 → 주소로 바꿔서 넘겨요) */}
+      <ImageGallery urls={product.images.map(imageUrl)} alt={product.title} />
 
       {/* 글쓴이 */}
       <div className="flex items-center justify-between border-b border-line py-5">

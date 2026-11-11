@@ -36,7 +36,13 @@ async function EditForm({ params }: { params: PageProps<"/products/[id]/edit">["
       action={updateProduct.bind(null, product.id)}
       submitLabel="수정 완료"
       cancelHref={`/products/${product.id}`}
-      initial={{ title: product.title, price: product.price, description: product.description }}
+      userId={me.id}
+      initial={{
+        title: product.title,
+        price: product.price,
+        description: product.description,
+        images: product.images,
+      }}
     />
   );
 }

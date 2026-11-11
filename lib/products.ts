@@ -8,6 +8,8 @@ export type Product = {
   title: string;
   price: number;
   description: string;
+  // Storage에 있는 사진 경로들. 첫 번째가 대표 사진 (주소로 바꿀 땐 lib/images.ts의 imageUrl)
+  images: string[];
   created_at: string;
   updated_at: string;
   // market_profiles 와 조인해서 가져온 글쓴이 닉네임
@@ -16,7 +18,7 @@ export type Product = {
 
 // "seller:market_profiles(nickname)" = seller_id 외래키를 따라가서 닉네임을 seller라는 이름으로 가져오기
 const PRODUCT_COLUMNS =
-  "id, seller_id, title, price, description, created_at, updated_at, seller:market_profiles(nickname)";
+  "id, seller_id, title, price, description, images, created_at, updated_at, seller:market_profiles(nickname)";
 
 // 최신 글부터 목록
 export async function getProducts(limit = 40): Promise<Product[]> {
