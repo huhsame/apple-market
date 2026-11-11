@@ -2,6 +2,8 @@
 
 우리 동네 중고거래 웹사이트 (개발 공부용, 단계별 진행)
 
+🔗 **배포 주소: https://apple-market-vert.vercel.app** (Vercel, `main` 브랜치에 push하면 자동 배포)
+
 - **Next.js 16** (App Router, Server Actions, `proxy.ts`)
 - **Supabase** (Auth + Postgres) — 가계부(MONEY FLOW)와 **같은 프로젝트**를 사용
 - **Tailwind CSS v4** · 화이트 & 블랙 디자인 · Pretendard 폰트
